@@ -1,10 +1,9 @@
 import time
 import argparse
 import json
-import sys
-import pickle
 
-parser = argparse.ArgumentParser()
+
+parser = argparse.ArgumentParser()  
 parser.add_argument("body")
 
 args = parser.parse_args()

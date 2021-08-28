@@ -1,13 +1,17 @@
 from flask import Flask
 from flask import request
+from flask_cors import CORS, cross_origin
 import subprocess
 import pickle
 import json
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 processes_led1 = []
 
-@app.route('/led1', methods=['GET'])
+@app.route('/led1', methods=['POST'])
+@cross_origin()
 def change_led():
   try:
     request_data = request.get_json()
