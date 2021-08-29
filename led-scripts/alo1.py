@@ -12,6 +12,6 @@ body = json.loads(args.body)
 
 
 while True:
-  print(body['test'])
+  print(body)
   #print(body.get("test"))
   time.sleep(1)
