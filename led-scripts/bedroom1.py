@@ -3,13 +3,22 @@ from rpi_ws281x import *
 import argparse
 import random
 from gpiozero import Button
+import argparse, json
+
 # LED strip configuration:
+
+parser = argparse.ArgumentParser()
+parser.add_argument("body")
+args = parser.parse_args()
+body = json.loads(args.body)
+
+
 LED_COUNT = 230     # Number of LED pixels.
 LED_PIN = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 # LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA = 10      # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS = 205   # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS = body.get("brightness")   # Set to 0 for darkest and 255 for brightest
 # True to invert the signal (when using NPN transistor level shift)
 LED_INVERT = False
 LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
@@ -164,52 +173,48 @@ if __name__ == "__main__":
   last_heart_beat = time.monotonic()
   next_heart_beat = last_heart_beat + heart_rate
 
+  MODE_LIST = {
+    "colorWipe": colorWipe(strip,range(256),10,True),
+    "theaterChase": theaterChase(strip, Color(127,127,127)),
+    "theaterChaseRainbow": theaterChaseRainbow(strip),
+    "rainbow": rainbow(strip),
+    "rainbowCycle": rainbowCycle(strip),
+
+  }
+
   #m0 = colorWipe(strip,range(256),10,True)
   #m1 = colorWipe(strip,[RED,GREEN,BLUE],10)
   #m2 = theaterChase(strip, Color(127,127,127))
-  m3 = rainbow(strip)
+  #m3 = rainbow(strip)
   #m4 = colorChaser(strip,0)
-  m5 = rainbowCycle(strip)
-  m6 = theaterChaseRainbow(strip)
+  #m5 = rainbowCycle(strip)
+  #m6 = theaterChaseRainbow(strip)
   #m7 = colorWipe(strip, [GREEN],10)
   #m8 = theaterChase(strip, Color(127,0,0))
   cl = clear(strip)
-  modes = cycle_sequence([m3, m5, m6])
+  #modes = cycle_sequence([m3, m5, m6])
   off = False
   try:
-    mode = m3
+    #mode = m3
     while True:
       now = time.monotonic()
-      #print ('Color wipe animations.')
-      # colorWipe(strip, Color(255, 0, 0))  # Red wipe
-      # colorWipe(strip, Color(0, 255, 0))  # Blue wipe
-      # colorWipe(strip, Color(0, 0, 255))  # Green wipe
-      #print ('Theater chase animations.')
-      # theaterChase(strip, Color(127, 127, 127))  # White theater chase
-      # theaterChase(strip, Color(127,   0,   0))  # Red theater chase
-      # theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
-      #print ('Rainbow animations.')
-      # rainbow(strip)
-      # rainbowCycle(strip)
-      # theaterChaseRainbow(strip)
-      # colorChaser(strip)
-      # clear(strip)
-      if off_but.is_pressed:
-        if not off:
-          mode = cl
-          off = True
-        else:
-          mode = m3
-          off = False
-        time.sleep(1)
+  
+      # if off_but.is_pressed:
+      #   if not off:
+      #     mode = cl
+      #     off = True
+      #   else:
+      #     mode = m3
+      #     off = False
+      #   time.sleep(1)
 
-      if but.is_pressed or mode is None:
-        #mode = next(modes)
-        LED_BRIGHTNESS = (LED_BRIGHTNESS+50) % 256
-        strip.setBrightness(LED_BRIGHTNESS)
-        print(LED_BRIGHTNESS)
+      # if but.is_pressed or mode is None:
+      #   #mode = next(modes)
+      #   LED_BRIGHTNESS = (LED_BRIGHTNESS+50) % 256
+      #   strip.setBrightness(LED_BRIGHTNESS)
+      #   print(LED_BRIGHTNESS)
 
-        time.sleep(1)
+      #   time.sleep(1)
 
       if now >= next_heart_beat:
         next(mode)
