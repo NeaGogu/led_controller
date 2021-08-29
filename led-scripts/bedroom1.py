@@ -195,7 +195,7 @@ if __name__ == "__main__":
   #modes = cycle_sequence([m3, m5, m6])
   off = False
   try:
-    #mode = m3
+    mode = MODE_LIST[body.get("mode")]
     while True:
       now = time.monotonic()
   
