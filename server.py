@@ -39,10 +39,9 @@ def change_led():
       if(len(LED_INFO["processes"]) > 0):
         #LED_INFO["processes"][-1].kill()
         print("KILLING: ",LED_INFO["processes"][0].pid)
-        print("ALOOOOO1")
+        
         #os.kill(LED_INFO["processes"][0].pid, signal.SIGTERM)
         os.killpg(os.getpgid(LED_INFO["processes"][0].pid), signal.SIGTERM)
-        print("ALOOOOOO2")
         LED_INFO["processes"].pop(0)
         #os.system('sudo kill '+str(LED_INFO["processes"][0].pid))
 
@@ -87,4 +86,4 @@ def after_request(response):
 
 if __name__ == '__main__':
   # run app in debug mode on port 5000
-  app.run(debug=True,host='192.168.0.140', port=5000)
+  app.run(debug=True,host='192.168.0.140', port=5001)
