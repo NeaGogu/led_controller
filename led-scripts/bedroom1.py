@@ -4,9 +4,10 @@ import argparse
 import random
 from gpiozero import Button
 import argparse, json
-
+import os
 # LED strip configuration:
 
+print(os.getpid())
 parser = argparse.ArgumentParser()
 parser.add_argument("body")
 args = parser.parse_args()
@@ -30,11 +31,10 @@ BLUE = Color(0, 0, 255)
 
 
 def clear(strip):
-  while True:
-    for i in range(strip.numPixels()):
-      strip.setPixelColor(i, 0)
-    strip.show()
-    yield
+  for i in range(strip.numPixels()):
+    strip.setPixelColor(i, 0)
+  strip.show()
+
 
 
 def cycle_sequence(seq):
@@ -196,9 +196,10 @@ if __name__ == "__main__":
   off = False
   try:
     mode = MODE_LIST[body.get("mode")]
+    clear(strip)
     while True:
       now = time.monotonic()
-  
+
       # if off_but.is_pressed:
       #   if not off:
       #     mode = cl
