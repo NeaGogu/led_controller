@@ -14,6 +14,6 @@ print("ID OF ALO1 ", os.getpid())
 print("sugi pula")
 
 while True:
-  #print(body)
+  print(body)
   #print(body.get("test"))
   time.sleep(1)
