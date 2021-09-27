@@ -28,10 +28,10 @@ off_but = Button(23)
 RED = Color(255, 0, 0)
 GREEN = Color(0, 255, 0)
 BLUE = Color(0, 0, 255)
-INPUT_COLOR = 16711680
-print('asdasdsad', INPUT_COLOR)
+INPUT_COLOR = body.get('color')
 
-print("ALOOOO ",Color(255,0,0), type(Color(0,255,0)))
+
+
 def clear(strip):
   for i in range(strip.numPixels()):
     strip.setPixelColor(i, 0)
