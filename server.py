@@ -46,6 +46,7 @@ def change_led():
         os.killpg(os.getpgid(LED_INFO["processes"][0].pid), signal.SIGTERM)
         LED_INFO["processes"].pop(0)
         #os.system('sudo kill '+str(LED_INFO["processes"][0].pid))
+      print(body_json)
 
       proc = subprocess.Popen(["sudo", "python3", "./led-scripts/bedroom1.py", body_json], preexec_fn=os.setsid)
 

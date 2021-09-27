@@ -176,7 +176,7 @@ if __name__ == "__main__":
 
   MODE_LIST = {
     "colorWipe": colorWipe(strip,range(256),10,True),
-    "theaterChase": theaterChase(strip, 16711680),
+    "theaterChase": theaterChase(strip, INPUT_COLOR),
     "theaterChaseRainbow": theaterChaseRainbow(strip),
     "rainbow": rainbow(strip),
     "rainbowCycle": rainbowCycle(strip),
