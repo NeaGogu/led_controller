@@ -28,6 +28,7 @@ off_but = Button(23)
 RED = Color(255, 0, 0)
 GREEN = Color(0, 255, 0)
 BLUE = Color(0, 0, 255)
+INPUT_COLOR = body.get('color')
 
 print("ALOOOO ",Color(255,0,0), type(Color(0,255,0)))
 def clear(strip):
@@ -83,7 +84,7 @@ def colorWipe(strip, color_seq, wait_ms=50, rainbow=False):
       yield
 
 
-def theaterChase(strip, color, wait_ms=50, iterations=10):
+def theaterChase(strip, color, wait_ms=100, iterations=10):
   """Movie theater light style chaser animation."""
   print('Theater chase animations.')
   while True:
@@ -123,7 +124,7 @@ def rainbowCycle(strip, wait_ms=20, iterations=5):
       yield
 
 
-def theaterChaseRainbow(strip, wait_ms=50):
+def theaterChaseRainbow(strip, wait_ms=100):
   """Rainbow movie theater light style chaser animation."""
   while True:
     for j in range(256):
@@ -175,7 +176,7 @@ if __name__ == "__main__":
 
   MODE_LIST = {
     "colorWipe": colorWipe(strip,range(256),10,True),
-    "theaterChase": theaterChase(strip, Color(127,127,127)),
+    "theaterChase": theaterChase(strip, INPUT_COLOR),
     "theaterChaseRainbow": theaterChaseRainbow(strip),
     "rainbow": rainbow(strip),
     "rainbowCycle": rainbowCycle(strip),

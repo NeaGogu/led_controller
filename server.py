@@ -13,7 +13,8 @@ LED_INFO = {
   "processes": [],
   "status": False,
   "brightness": 200,
-  "mode": ""
+  "mode": "",
+  "color": 0
 }
 
 @app.route('/led1', methods=['GET'])
@@ -23,7 +24,8 @@ def get_led_info():
     return jsonify(
       status=LED_INFO['status'],
       brightness=LED_INFO['brightness'],
-      mode=LED_INFO['mode']
+      mode=LED_INFO['mode'],
+      color=LED_INFO['color']
     )
   except Exception as e:
     return jsonify(e)
@@ -53,6 +55,7 @@ def change_led():
       LED_INFO['status'] = True
       LED_INFO['mode'] = body['mode']
       LED_INFO['brightness'] = body['brightness']
+      LED_INFO['color'] = body['color']
       return('open')
 
     if(request_data['start'] == False):
