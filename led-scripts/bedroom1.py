@@ -29,6 +29,7 @@ RED = Color(255, 0, 0)
 GREEN = Color(0, 255, 0)
 BLUE = Color(0, 0, 255)
 INPUT_COLOR = body.get('color')
+print('asdasdsad', INPUT_COLOR)
 
 print("ALOOOO ",Color(255,0,0), type(Color(0,255,0)))
 def clear(strip):
